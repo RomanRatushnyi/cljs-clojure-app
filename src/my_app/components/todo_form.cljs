@@ -38,4 +38,4 @@
                 (reset! text "")
                 (reset! deadline (default-deadline))
                 (reset! error nil))))}
-        "Добавить"]])))
+        "💾 Добавить"]])))

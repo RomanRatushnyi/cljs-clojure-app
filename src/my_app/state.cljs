@@ -23,3 +23,13 @@
          (fn [todos]
            (remove #(= (:id %) id) todos)))
   (save-to-storage!))
+
+(defn update-todo! [id updates]
+  (swap! app-db update :todos
+         (fn [todos]
+           (mapv (fn [t]
+                   (if (= (:id t) id)
+                     (merge t updates)
+                     t))
+                 todos)))
+  (save-to-storage!))

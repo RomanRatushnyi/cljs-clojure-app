@@ -7,4 +7,4 @@
   (let [todos (:todos @state/app-db)]
     [:div
      (for [todo (sorted-todos todos)]
-       ^{:key (:id todo)} [todo-item todo])]))
+       ^{:key (:id todo)} [todo-item (:id todo)])]))

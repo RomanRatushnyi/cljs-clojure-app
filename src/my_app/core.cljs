@@ -11,13 +11,17 @@
 
 (defn app []
   (case @router/route
-    :auth [auth-form]
-    :todos [:div
-            [:h1 "Todo List"]
-            [todo-form]
-            [todo-list]]
-    [:div "Неизвестный маршрут"]))
+    "/"      [auth-form]
+    "/todos" (if @router/auth-key
+               [:div
+                [:h1 "Todo List"]
+                [todo-form]
+                [todo-list]]
+               [:div "🚫 Доступ запрещён."])
+    [:div "404: Страница не найдена"]))
 
 (defn init []
   (state/load-from-storage!)
+  (router/init-router!)
   (rdom/render root [app]))
+  

@@ -17,3 +17,9 @@
                           (update todo :deadline (fn [d] (js/Date. d))))
                         todos-clj)]
         (swap! app-db assoc :todos todos)))))
+
+(defn delete-todo! [id]
+  (swap! app-db update :todos
+         (fn [todos]
+           (remove #(= (:id %) id) todos)))
+  (save-to-storage!))

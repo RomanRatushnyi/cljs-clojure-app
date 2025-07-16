@@ -3,7 +3,8 @@
 
 (defn todo-item [todo]
   (let [{:keys [id text deadline done?]} todo]
-    [:div {:style {:text-decoration (when done? "line-through")}}
+    [:div {:style {:display "flex" :gap "1rem"
+                   :text-decoration (when done? "line-through")}}
      [:input {:type "checkbox"
               :checked done?
               :on-change #(do
@@ -15,4 +16,5 @@
                                                t))
                                            todos)))
                             (state/save-to-storage!))}]
-     [:span text " (до: " (.toLocaleString deadline) ")"]]))
+     [:span text " (до: " (.toLocaleString deadline) ")"]
+     [:button {:on-click #(state/delete-todo! id)} "🗑 Удалить"]]))
